@@ -72,5 +72,5 @@
 
 ## 스터디 자료
 
-- 간단 예제로 배워보는 React by 인브로즈
-- 만들면서 배우는 리액트 : 기초 by 진유림
+- [간단 예제로 배워보는 React by 인브로즈](https://www.youtube.com/@inbrozz)
+- [만들면서 배우는 리액트 : 기초 by 진유림](https://www.inflearn.com/course/%EB%A7%8C%EB%93%A4%EB%A9%B4%EC%84%9C-%EB%B0%B0%EC%9A%B0%EB%8A%94-%EB%A6%AC%EC%95%A1%ED%8A%B8-%EA%B8%B0%EC%B4%88)
