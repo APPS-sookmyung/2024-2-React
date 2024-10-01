@@ -1,11 +1,14 @@
 import React from "react";
 
-export default function Product() {
+export default function Product({ title, price, discount_rate, image }) {
   return (
-    <div>
-      <img src="." alt="제품 이미지" />
-      <div>제품명</div>
-      <div>가격</div>
+    <div className="product-container">
+      <img src={image} alt={title} className="product-image" />
+      <div className="product-info">
+        <h4>{title}</h4>
+        <span className="price">{price}원</span>
+        {discount_rate && <span className="discount-rate">{discount_rate}%</span>}
+      </div>
     </div>
   );
 }
