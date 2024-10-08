@@ -1,0 +1,69 @@
+.app-container {
+  width: 100%;
+  padding: 20px;
+}
+
+.hot-deal-title {
+  padding: 20px 0 40px 0;
+  text-align: center;
+}
+
+.hot-deal-title h2 {
+  font-size: 2rem;
+  color: #ff9a00;
+  margin-bottom: 10px;
+}
+
+.hot-deal-title p {
+  font-size: 1.2rem;
+  margin: 10px 0;
+}
+
+.products-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.product-container {
+  width: 250px;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.product-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.product-info h4 {
+  margin: 10px 0;
+  font-size: 1.2rem;
+}
+
+.product-info span {
+  display: block;
+  font-size: 1rem;
+  color: #555;
+}
+
+.product-info .price {
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-align: left;
+}
+
+.product-info .discount-rate {
+  color: red;
+  font-weight: bold;
+  font-size: 2rem;
+  margin-top: 5px;
+  text-align: right;
+}
