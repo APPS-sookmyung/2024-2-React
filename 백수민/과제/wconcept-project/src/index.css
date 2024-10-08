@@ -1,0 +1,30 @@
+.app-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.product-container {
+    width: 220px;
+    margin: 16px;
+}
+
+.product-container img {
+    max-width: 100%;
+}
+
+.product-info {
+    margin-left: 10px;
+    align-items: center;
+}
+
+#bName {
+    margin-bottom: 0;
+}
+
+#pName {
+    color:gray;
+    margin-top: 10px;
+    margin-bottom: 60px;
+}
+
+
