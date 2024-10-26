@@ -1,34 +1,34 @@
-import React, { useState } from "react";
+import React from "react";
+import { useState } from "react";
 
 export default function App() {
-  console.log("App 컴포넌트 렌더링 발생");
-
+  // number
+  const [num, setNum] = useState(0);
+  // string
+  const [name, setName] = useState("");
+  //boolean
+  const [isChecked, setIsChecked] = useState(false);
   return (
     <div>
-      부모 컴포넌트
-      <Child />
+      <input
+        type="number"
+        value={num}
+        onChange={(e) => setNum(e.target.value)}
+      />
+      <input
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <div>
+        <input
+          type="checkbox"
+          value={isChecked}
+          onChange={(e) => setIsChecked(e.target.checked)}
+        />
+        {isChecked ? <span>체크됨</span> : <span>체크안됨</span>}
+      </div>
     </div>
   );
 }
-
-const Child = () => {
-  const [count, setCount] = useState(0);
-
-  console.log("Child 컴포넌트 렌더링 발생");
-
-  return (
-    <div>
-      자식 컴포넌트
-      <span>{count}</span>
-      <button onClick={() => setCount(count + 1)}>state 변경</button>
-      <GrandChild />
-    </div>
-  );
-};
-
-const GrandChild = () => {
-  console.log("GrandChild 컴포넌트 렌더링 발생");
-
-  return <div>손주 컴포넌트</div>;
-};
 
