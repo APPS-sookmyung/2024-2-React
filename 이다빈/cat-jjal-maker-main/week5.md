@@ -35,4 +35,26 @@
 
 # 3.10
 
-- 내용을 넘긴 것도 props로 접근 가능
+- 내용을 넘긴 것도 props로 접근 가능, children으로 넘어옴
+
+# 3.12
+
+## 스타일링
+
+- className, onClick
+- style을 prop으로 넘김
+  - style={오브젝트}
+- emotion 라이브러리
+- tailwindcss
+
+# 3.13
+
+## 이벤트다루기
+
+- 보통 핸들러 이름 앞에 hanle을 붙여줌
+
+# 3.14
+
+## useState
+
+- 변경할 수 있는 값
