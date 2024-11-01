@@ -43,29 +43,10 @@
     <script type="text/babel">
       console.log("야옹");
 
-      const catItem = (
-        <li>
-          <img src="https://cataas.com/cat/HSENVDU4ZMqy7KQ0/says/react" />
-        </li>
-      );
+      const Title = (props) => {
+        return <h1>{props.children}</h1>;
+      };
 
-      const favorites = (
-        <ul class="favorites">
-          {catItem}
-          {catItem}
-          {catItem}
-        </ul>
-      );
-      const mainCard = (
-        <div class="main-card">
-          <img
-            src="https://cataas.com/cat/HSENVDU4ZMqy7KQ0/says/react"
-            alt="고양이"
-            width="400"
-          />
-          <button>🤍</button>
-        </div>
-      );
       const form = (
         <form>
           <input
@@ -76,20 +57,44 @@
           <button type="submit">생성</button>
         </form>
       );
-      const title = <h1>1번째 고양이 가라사대</h1>;
 
-      function sayHello(name) {
-        return "안녕 + " + name;
+      function CatItem(props) {
+        return (
+          <li>
+            <img src={props.img} />
+          </li>
+        );
       }
 
-      sayHello("다빈");
+      function Favorites() {
+        return (
+          <ul class="favorites">
+            <CatItem img="https://cataas.com/cat/BxqL2EjFmtxDkAm2/says/inflearn" />
+            <CatItem img="https://cataas.com/cat/18MD6byVC1yKGpXp/says/JavaScript" />
+          </ul>
+        );
+      }
+
+      const MainCard = () => {
+        return (
+          <div class="main-card">
+            <img
+              src="https://cataas.com/cat/HSENVDU4ZMqy7KQ0/says/react"
+              alt="고양이"
+              width="400"
+            />
+            <button>🤍</button>
+          </div>
+        );
+      };
 
       const app = (
         <div>
-          {title}
+          <Title>1번째 고양이 가라사대</Title>
+          <Title>2번째 고양이 가라사대</Title>
           {form}
-          {mainCard}
-          {favorites}
+          <MainCard />
+          <Favorites />
         </div>
       );
 
