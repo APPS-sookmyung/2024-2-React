@@ -14,6 +14,55 @@ h2 {
 .section {
   padding: 90px 0;
 }
+.welcome {
+  display: grid;
+  place-content: center;
+  padding-top: 56px;
+}
+.welcome-header-row {
+  margin-bottom: 56px;
+  margin-left: 20px;
+}
+.welcome-header {
+  font-size: 64px;
+  font-weight: 600;
+  margin: 0;
+}
+.welcome-header-description {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
+.welcome-header-description p {
+  margin: 0;
+}
+.welcome-video-content {
+  position: relative;
+  width: fit-content;
+}
+.welcome-video-content video {
+  height: auto;
+  width: 87.5vw;
+  border-radius: 28px;
+}
+.video-control {
+  position: absolute;
+  margin-left: 80vw;
+  margin-top: -6vw;
+}
+.video-control button {
+  margin-left: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  border: 0;
+  display: grid;
+  place-content: center;
+  background-color: #dfdfe4;
+  color: rgba(0, 0, 0, 0.56);
+  padding: 20px;
+}
+
 .section-header {
   width: 87.5vw;
   max-width: 1680px;

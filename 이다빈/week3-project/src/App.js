@@ -1,29 +1,27 @@
-import Card from "./components/Card";
+import Gallery from "./components/Gallery";
+import Video from "./components/Video";
+import Header from "./components/Header";
 import { dummy } from "./cardDummy";
+import { useState } from "react";
 
 function App() {
+  const [play, setPlay] = useState(false);
+  const videoTag = document.querySelector("video");
+  const handlePlay = () => {
+    if (!play) {
+      videoTag.play();
+    } else {
+      videoTag.pause();
+    }
+    setPlay(!play);
+  };
+
   return (
-    <div className="section">
-      <div className="section-header">
-        <h2 className="typography-section-headline">알면 알수록, Mac.</h2>
-      </div>
-      <div className="gallery">
-        <div className="scroll-container">
-          <div className="item-container">
-            <ul className="card-set">
-              {dummy.map((item) => {
-                return (
-                  <Card
-                    id={item.id}
-                    label={item.label}
-                    headline={item.headline}
-                    img_path={item.img_path}
-                  />
-                );
-              })}
-            </ul>
-          </div>
-        </div>
+    <div>
+      <Video play={play} handlePlay={handlePlay} />
+      <div className="section">
+        <Header layout="section" text="알면 알수록, Mac." />
+        <Gallery dummy={dummy} />
       </div>
     </div>
   );
