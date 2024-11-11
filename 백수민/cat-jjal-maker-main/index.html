@@ -33,7 +33,14 @@
   <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
   <script type="text/babel">
-    console.log("야옹");
+    const jsonLocalStorage = {
+      setItem: (key, value) => {
+        localStorage.setItem(key, JSON.stringify(value));
+      },
+      getItem: (key) => {
+        return JSON.parse(localStorage.getItem(key));
+      },
+    };
 
     const Title = (props) => {
       return (
@@ -42,11 +49,36 @@
     };
 
     // 폼 전송을 하면 브라우저가 refresh 됨 - html 기본 동작
-    const Form = ({ handleFormSubmit }) => {
+    const Form = ({ updateMainCat }) => {
+      const includesHangul = (text) => /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/i.test(text);
+      const [value, setValue] = React.useState('');
+      const [errorMessage, setErrorMessage] = React.useState('');
+
+      function handleInputChange(e) {
+        const userValue = e.target.value;
+        setErrorMessage("");
+        if (includesHangul(userValue)) {
+          setErrorMessage("한글은 인력할 수 없습니다.");
+        }
+        setValue(e.target.value.toUpperCase());
+      }
+
+      function handleFormSubmit(e) {
+        e.preventDefault(); // browser refresh 안됨 js default 문법
+        setErrorMessage("");
+
+        if (value === "") {
+          setErrorMessage("빈 값으로 만들 수 없습니다.")
+          return; // input이 빈 값일 경우 함수가 바로 종료될 수 있게끔 return 호출
+        }
+        updateMainCat();
+      }
+
       return (
         <form onSubmit={handleFormSubmit}>
-          <input type="text" name="name" placeholder="영어 대사를 입력해주세요" />
+          <input type="text" name="name" placeholder="영어 대사를 입력해주세요" value={value} onChange={handleInputChange} />
           <button type="submit">생성</button>
+          <p style={{ color: 'red' }}>{errorMessage}</p>
         </form>
       );
     };
@@ -62,24 +94,22 @@
     }
 
     // 화살표 함수 방식으로 작성
-    const MainCard = ({ img }) => {
-      function handleHeartClick() {
-        console.log("하트 눌렀음");
-      }
-
+    const MainCard = ({ img, onHeartClick }) => {
       return (
         <div className="main-card">
           <img src={img} alt="고양이" width="400" />
-          <button onClick={handleHeartClick}>🤍</button>
+          <button onClick={onHeartClick}>🤍</button>
         </div>
       );
     };
 
-    function Favourites() {
+    function Favourites({ favourites }) {
       return (
         <ul className="favorites">
-          <CatItem img="https://cataas.com/cat/BxqL2EjFmtxDkAm2/says/inflearn" />
-          <CatItem img="https://cataas.com/cat/18MD6byVC1yKGpXp/says/JavaScript" />
+          {favourites.map((cat) => (
+            // 배열의 item마다 키 값 필요
+            <CatItem img={cat} key={cat} />
+          ))}
         </ul>
       );
     }
@@ -88,30 +118,40 @@
     // 부모 컴포넌트로 상태를 끌어올리고 / 정의하고 => 위에서 만든 상태를 자식 컴포넌트에 props로 넘겨준다
     const CAT1 = "https://cataas.com/cat/HSENVDU4ZMqy7KQ0/says/react";
     const CAT2 = "https://cataas.com/cat/BxqL2EjFmtxDkAm2/says/inflearn";
-    const App = () => {
-      const [counter, setCounter] = React.useState(1);
-      console.log("카운터", counter);
-      const [mainCatImg, setMainCatImg] = React.useState(CAT1);
+    const CAT3 = "https://cataas.com/cat/18MD6byVC1yKGpXp/says/JavaScript";
 
-      function handleFormSubmit(event) {
-        event.preventDefault(); // browser refresh 안됨 js default 문법
-        console.log("폼 전송됨")
-        setCounter(counter + 1);
+    const App = () => {
+      // number로 감싸주는 이유: localStorage의 value 값은 string으로 저장된다.
+      //const [counter, setCounter] = React.useState(Number(localStorage.getItem("counter")));
+      const [counter, setCounter] = React.useState(jsonLocalStorage.getItem("counter") || 0);
+      const [mainCatImg, setMainCatImg] = React.useState(CAT1);
+      const [favourites, setFavourites] = React.useState(jsonLocalStorage.getItem("favourites") || []);
+      // 앞에 값이 NULL이면 []
+
+      function updateMainCat() {
         setMainCatImg(CAT2);
+        const nextCounter = counter + 1;
+        setCounter(nextCounter);
+        jsonLocalStorage.setItem("counter", nextCounter);
       }
 
+      function handleHeartClick() {
+        const nextFavourites = [...favourites, mainCatImg];
+        setFavourites(nextFavourites);
+        jsonLocalStorage.setItem("favourites", nextFavourites);
+      }
       return (
         <div>
           <Title>{counter}번째 고양이 가라사대</Title>
-          <Form handleFormSubmit={handleFormSubmit} />
-          <MainCard img={mainCatImg} />
-          <Favourites />
+          <Form updateMainCat={updateMainCat} />
+          <MainCard img={mainCatImg} onHeartClick={handleHeartClick} />
+          <Favourites favourites={favourites} />
         </div>
       );
     };
 
-    // div로 최상위 태그가 하나도록 묶어준다 
-    // Title 태그 안에다 적은 내용은 props의 children로 넘어간다
+    // // div로 최상위 태그가 하나도록 묶어준다 
+    // // Title 태그 안에다 적은 내용은 props의 children로 넘어간다
     // element => component로 바꿔주기
     // const app = (
     //   <div>
