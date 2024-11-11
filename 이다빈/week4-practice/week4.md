@@ -69,3 +69,30 @@ const [count, setCount] = useState(0);
 ## 7강
 
 ### 다양한 타입(number, string, boolean)의 State 다루기
+
+## 8강
+
+### State 배열과 객체
+
+- 주의
+  - setter 함수를 사용하여 state를 업데이트 해줘야 함
+  - 새로운 배열 혹은 객체를 만들어서 setter 함수에 전달해줘야 함
+  ```
+  setPersonList([
+    ...personList,
+    {
+      id: nextId++,
+      name: newName,
+    },
+  ]);
+  ```
+- 참고 : https://react.dev/learn/updating-arrays-in-state
+
+## 9강
+
+### React의 State Batch 처리
+
+- 이벤트 함수 호출 시 바로 state를 업데이트 해주지 않음
+- State Batch 처리(일괄처리)란?
+- 이벤트 핸들러 함수 내 state 변경 요청을 모아 일괄적으로 한 번에 state를 업데이트
+- state 업데이트 처리는 이벤트 핸들러 함수의 모든 코드들이 실행되고 난 후, 가장 마지막에 수행됨
